@@ -26,6 +26,9 @@
 		6BCED7001A4A629D0005596F /* XCProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA798CFD524E5A3CF155C816 /* XCProjectTests.m */; };
 		6BCED7011A4A62A00005596F /* XCClassDefinitionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7984685319A7BB1B37DBE9 /* XCClassDefinitionTests.m */; };
 		6BCED7031A4A62B00005596F /* XCKeyBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA798BD3F30B4E39066F8108 /* XCKeyBuilderTests.m */; };
+		A8FEDDBD1B271AAA00CDED35 /* XCSchemeDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = A8FEDDBB1B271AAA00CDED35 /* XCSchemeDefinition.h */; };
+		A8FEDDBE1B271AAA00CDED35 /* XCSchemeDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = A8FEDDBC1B271AAA00CDED35 /* XCSchemeDefinition.m */; };
+		A8FEDDBF1B271AAA00CDED35 /* XCSchemeDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = A8FEDDBC1B271AAA00CDED35 /* XCSchemeDefinition.m */; };
 		BA79809B196A253223139967 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA798378F006ADD44A37C678 /* InfoPlist.strings */; };
 		BA7980D47618535CEEE56C07 /* XcodeSourceFileType.h in Headers */ = {isa = PBXBuildFile; fileRef = BA798CF27DA49D73EBE0FCB7 /* XcodeSourceFileType.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BA7981663E00E804C25FDA0D /* XCProject.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7989AC9710D456572783C7 /* XCProject.m */; };
@@ -94,6 +97,8 @@
 		6BCED6E51A4A61DC0005596F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6BD8982D14EA2441007875F4 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		87612B192A1CB1AA3ECE3A5F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A8FEDDBB1B271AAA00CDED35 /* XCSchemeDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCSchemeDefinition.h; sourceTree = "<group>"; };
+		A8FEDDBC1B271AAA00CDED35 /* XCSchemeDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCSchemeDefinition.m; sourceTree = "<group>"; };
 		BA798233F677AB6DE9FB37FC /* NSString+TestResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TestResource.m"; sourceTree = "<group>"; };
 		BA798257DC8C1D51244A87F2 /* expanz-iOS-SDK.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "expanz-iOS-SDK.zip"; sourceTree = "<group>"; };
 		BA798287F70884A45C9F3721 /* XCAbstractDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCAbstractDefinition.m; sourceTree = "<group>"; };
@@ -289,6 +294,8 @@
 				BA7989AC9710D456572783C7 /* XCProject.m */,
 				BA798D221F1008AE859B76B8 /* XCXibDefinition.h */,
 				BA798FDE9BAA7D87499853ED /* XCFileOperationQueue.h */,
+				A8FEDDBB1B271AAA00CDED35 /* XCSchemeDefinition.h */,
+				A8FEDDBC1B271AAA00CDED35 /* XCSchemeDefinition.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -354,6 +361,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8FEDDBD1B271AAA00CDED35 /* XCSchemeDefinition.h in Headers */,
 				BA7980D47618535CEEE56C07 /* XcodeSourceFileType.h in Headers */,
 				BA798DC320D5F6F188C112B3 /* XCKeyBuilder.h in Headers */,
 				BA7983A0DEE6E0B98286444A /* XCClassDefinition.h in Headers */,
@@ -538,6 +546,7 @@
 				BA7988C3E49E2C17AACB9CDC /* XcodeSourceFileType.m in Sources */,
 				BA798BD3214388015EAFDDFB /* XCTarget.m in Sources */,
 				BA79866BA1ACA2933B98F48C /* XCFrameworkDefinition.m in Sources */,
+				A8FEDDBE1B271AAA00CDED35 /* XCSchemeDefinition.m in Sources */,
 				BA7981FC099C3D8C4BA8E511 /* XCSubProjectDefinition.m in Sources */,
 				BA79862308DF0F7F984AF86E /* XCProjectBuildConfig.m in Sources */,
 				BA7981A76C28C0D8FE7392E0 /* XCClassDefinition.m in Sources */,
@@ -558,6 +567,7 @@
 				6BCED6FD1A4A62910005596F /* XCTargetTests.m in Sources */,
 				6BCED7031A4A62B00005596F /* XCKeyBuilderTests.m in Sources */,
 				6BCED6FF1A4A62970005596F /* XCSubProjectDefinitionTests.m in Sources */,
+				A8FEDDBF1B271AAA00CDED35 /* XCSchemeDefinition.m in Sources */,
 				6BCED6FE1A4A62950005596F /* XcodeFileReferenceTypeTests.m in Sources */,
 				BA798AECC575AEE83D96D580 /* NSString+TestResource.m in Sources */,
 			);
