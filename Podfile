@@ -1,6 +1,7 @@
-platform :osx, '10.6'
+platform :osx, '10.9'
 
 pod 'OCLogTemplate'
+pod 'IGHTMLQuery', '~> 0.8.4'
 
 post_install do |installer|
   installer.project.targets.each do |target|
