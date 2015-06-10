@@ -1,19 +1,27 @@
 //
-//  XCSchemeAction.m
+//  XCSchemeBuildableReference.m
 //  xcode-editor
 //
 //  Created by Alexandr on 6/9/15.
 //
 //
 
-#import "XCSchemeAction.h"
+#import "XCSchemeBuildableReference.h"
 #import "IGHTMLQuery.h"
 
-@implementation XCSchemeAction
+@implementation XCSchemeBuildableReference
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.attributes = @{};
+    }
+    return self;
+}
 
 - (void)parseNode:(IGXMLNode*)node
 {
-    self.name = [node.tag stringByReplacingOccurrencesOfString:@"Action" withString:@""];
     NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
     for (NSString *key in [node attributeNames]) {
         attributes[key] = [node attribute:key];
@@ -23,8 +31,7 @@
 
 - (IGXMLNode*)asXMLNode
 {
-    IGXMLDocument *node = [[IGXMLDocument alloc] initWithXMLString:@"<Tag/>" error:nil];
-    node.tag = [NSString stringWithFormat:@"%@Action", self.name];
+    IGXMLDocument *node = [[IGXMLDocument alloc] initWithXMLString:@"<BuildableReference/>" error:nil];
     for (NSString *key in [self.attributes allKeys]) {
         [node setAttribute:key value:self.attributes[key]];
     }
