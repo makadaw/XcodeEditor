@@ -8,7 +8,7 @@
 
 #import "XCSchemeAction.h"
 
-@interface XCSchemeBuildAction : XCSchemeAction
+@interface XCSchemeBuildAction : XCSchemeAction <XCSchemeActionContentBuildReference>
 @property (strong, nonatomic) NSArray *buildActionEntries;
 
 @end

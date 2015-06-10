@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "XCSchemeAction.h"
+#import "XCSchemeBuildableReference.h"
 
 /**
  * Represent scheme in xcode project
@@ -22,6 +23,9 @@
 - (void)addAction:(XCSchemeAction*)action;
 - (void)removeAction:(XCSchemeAction*)action;
 
+- (void)updateAllBuildableReferenceTo:(XCSchemeBuildableReference*)reference;
+
+- (void)loadWithFilePath:(NSString*)filePath;
 - (void)parseXML:(NSString*)xml;
 - (NSString*)asXML;
 

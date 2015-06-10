@@ -21,6 +21,15 @@
     return self;
 }
 
+- (void)updateBuildableReference:(XCSchemeBuildableReference*)reference
+{
+    for (XCSchemeBuildActionEntry *entry in self.buildActionEntries) {
+        if ([entry.attributes[@"buildForArchiving"] isEqualToString:@"YES"]) {
+            entry.buildableReference = reference;
+        }
+    }
+}
+
 - (void)parseNode:(IGXMLNode*)node
 {
     [super parseNode:node];

@@ -15,6 +15,13 @@
 #import "XCSourceFile.h"
 #import "XCProject.h"
 #import "XCProjectBuildConfig.h"
+#import "XCSchemeDefinition.h"
+#import "XCFileOperationQueue.h"
+
+@interface XCTarget ()
+@property (weak, nonatomic) XCFileOperationQueue *fileOperationQueue;
+
+@end
 
 @implementation XCTarget
 
@@ -226,6 +233,11 @@
 
 - (instancetype)duplicateWithTargetName:(NSString*)targetName productName:(NSString*)productName
 {
+    return [self duplicateWithTargetName:targetName productName:productName copySharedScheme:NO];
+}
+
+- (instancetype)duplicateWithTargetName:(NSString*)targetName productName:(NSString*)productName copySharedScheme:(BOOL)copyScheme
+{
 
     NSDictionary* targetObj = _project.objects[_key];
     NSMutableDictionary* dupTargetObj = [targetObj mutableCopy];
@@ -253,9 +265,54 @@
     NSString* dupTargetObjKey = [self addTargetToRootObjectTargets:dupTargetObj];
 
     [_project dropCache];
-
-    return [[XCTarget alloc] initWithProject:_project key:dupTargetObjKey name:targetName productName:productName
+    
+    XCTarget *newTarget = [[XCTarget alloc] initWithProject:_project key:dupTargetObjKey name:targetName productName:productName
         productReference:dupTargetObj[@"productReference"]];
+    
+    if (copyScheme) {
+        [self duplicateSchemeForTarge:newTarget];
+    }
+    
+    return newTarget;
+}
+
+- (void)duplicateSchemeForTarge:(XCTarget*)newTarget
+{
+    XCSchemeDefinition *baseScheme = [self targetScheme];
+    if (baseScheme) {
+        XCSchemeBuildableReference *reference = [[XCSchemeBuildableReference alloc] init];
+        reference.attributes = @{
+                                 @"BuildableIdentifier": @"primary",
+                                 @"BlueprintIdentifier": newTarget.key,
+                                 @"BuildableName": [NSString stringWithFormat:@"%@.app", newTarget.name],
+                                 @"BlueprintName": newTarget.name,
+                                 @"ReferencedContainer": [NSString stringWithFormat:@"container:%@", [_project.filePath lastPathComponent]]
+                                 };
+        
+        [baseScheme updateAllBuildableReferenceTo:reference];
+        
+        NSString *fileName = [NSString stringWithFormat:@"%@.xcscheme", newTarget.name];
+        NSString *schemeDir = [NSString stringWithFormat:@"%@/xcshareddata/xcschemes", [_project.filePath lastPathComponent]];
+        NSString *xml = [NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n%@", [baseScheme asXML]];
+        
+        self.fileOperationQueue = [_project fileOperationQueue];
+        [self.fileOperationQueue queueTextFile:fileName inDirectory:schemeDir withContents:xml];
+        NSLog(@"Add scheme %@ \n %@", fileName, xml);
+    }
+}
+
+/* ====================================================================================================================================== */
+#pragma mark - Target schemes
+- (XCSchemeDefinition*)targetScheme
+{
+    // Try to locate project shared scheme with same name as target
+    XCSchemeDefinition *scheme = nil;
+    NSString *schemePath = [_project.filePath stringByAppendingPathComponent:[NSString stringWithFormat:@"xcshareddata/xcschemes/%@.xcscheme", self.name]];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:schemePath isDirectory:NO]) {
+        scheme = [[XCSchemeDefinition alloc] init];
+        [scheme loadWithFilePath:schemePath];
+    }
+    return scheme;
 }
 
 /* ====================================================================================================================================== */

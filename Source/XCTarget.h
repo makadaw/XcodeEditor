@@ -66,5 +66,7 @@
 
 - (instancetype)duplicateWithTargetName:(NSString*)targetName productName:(NSString*)productName;
 
+- (instancetype)duplicateWithTargetName:(NSString*)targetName productName:(NSString*)productName copySharedScheme:(BOOL)copyScheme;
+
 @end
 

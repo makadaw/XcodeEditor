@@ -38,12 +38,33 @@
     self.actions = [NSArray arrayWithArray:actions];
 }
 
+#pragma mark - Modifications
+
+- (void)updateAllBuildableReferenceTo:(XCSchemeBuildableReference*)reference
+{
+    for (XCSchemeAction *action in self.actions) {
+        if ([action conformsToProtocol:@protocol(XCSchemeActionContentBuildReference)]) {
+            [(id<XCSchemeActionContentBuildReference>)action updateBuildableReference:reference];
+        }
+    }
+}
 
 #pragma mark - Parse/Serialize
+
+- (void)loadWithFilePath:(NSString*)filePath
+{
+    IGXMLDocument *rootNode = [[IGXMLDocument alloc] initWithXMLFilePath:filePath encoding:@"utf8" error:nil];
+    [self loadRootNode:rootNode];
+}
 
 - (void)parseXML:(NSString*)xml
 {
     IGXMLDocument *rootNode = [[IGXMLDocument alloc] initWithXMLString:xml error:nil];
+    [self loadRootNode:rootNode];
+}
+
+- (void)loadRootNode:(IGXMLNode*)rootNode
+{
     self.version = [rootNode attribute:@"version"];
     self.lastUpgradeVersion = [rootNode attribute:@"LastUpgradeVersion"];
     
